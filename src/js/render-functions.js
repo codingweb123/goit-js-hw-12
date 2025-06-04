@@ -1,13 +1,15 @@
 import SimpleLightbox from "simplelightbox"
 import "simplelightbox/dist/simple-lightbox.min.css"
 const gallery = document.querySelector(".gallery"),
-	loader = gallery.querySelector(".loader")
+	loader = gallery.querySelector(".loader"),
+	loadMore = gallery.querySelector(".more")
 let globalLightbox
-export const showLoader = () => {
-	loader.innerHTML = "Loading images, please wait..."
-	loader.classList.remove("visually-hidden")
-}
+export const showLoader = () => loader.classList.remove("visually-hidden")
 export const hideLoader = () => loader.classList.add("visually-hidden")
+export const showLoadMoreButton = () =>
+	loadMore.classList.remove("visually-hidden")
+export const hideLoadMoreButton = () =>
+	loadMore.classList.add("visually-hidden")
 export const clearGallery = () =>
 	gallery.querySelectorAll(".gallery-item").forEach(i => i.remove())
 export const createMarkup = ({
@@ -51,8 +53,8 @@ export const createGallery = images => {
 		""
 	)
 	document
-		.querySelector(".gallery")
-		.insertAdjacentHTML("beforeend", itemsMarkup)
+		.querySelector(".gallery .helpers")
+		.insertAdjacentHTML("beforebegin", itemsMarkup)
 	if (!globalLightbox) {
 		globalLightbox = new SimpleLightbox(".gallery a", {
 			captionsData: "alt",
