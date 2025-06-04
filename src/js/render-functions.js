@@ -4,15 +4,13 @@ const gallery = document.querySelector(".gallery"),
 	loader = gallery.querySelector(".loader"),
 	loadMore = gallery.querySelector(".more")
 let globalLightbox
-export const showLoader = () => loader.classList.remove("visually-hidden")
-export const hideLoader = () => loader.classList.add("visually-hidden")
-export const showLoadMoreButton = () =>
-	loadMore.classList.remove("visually-hidden")
-export const hideLoadMoreButton = () =>
-	loadMore.classList.add("visually-hidden")
-export const clearGallery = () =>
+const showLoader = () => loader.classList.remove("visually-hidden")
+const hideLoader = () => loader.classList.add("visually-hidden")
+const showLoadMoreButton = () => loadMore.classList.remove("visually-hidden")
+const hideLoadMoreButton = () => loadMore.classList.add("visually-hidden")
+const clearGallery = () =>
 	gallery.querySelectorAll(".gallery-item").forEach(i => i.remove())
-export const createMarkup = ({
+const createMarkup = ({
 	webformatURL,
 	largeImageURL,
 	tags,
@@ -47,13 +45,13 @@ export const createMarkup = ({
 	</li>
 	`
 }
-export const createGallery = images => {
+const createGallery = images => {
 	const itemsMarkup = images.reduce(
 		(acc, item) => (acc += createMarkup(item)),
 		""
 	)
-	document
-		.querySelector(".gallery .helpers")
+	gallery
+		.querySelector(".helpers")
 		.insertAdjacentHTML("beforebegin", itemsMarkup)
 	if (!globalLightbox) {
 		globalLightbox = new SimpleLightbox(".gallery a", {
@@ -61,4 +59,14 @@ export const createGallery = images => {
 			captionDelay: 250,
 		})
 	} else globalLightbox.refresh()
+}
+
+export {
+	showLoader,
+	hideLoader,
+	showLoadMoreButton,
+	hideLoadMoreButton,
+	clearGallery,
+	createMarkup,
+	createGallery,
 }
