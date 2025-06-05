@@ -23,7 +23,7 @@ const getQuery = target => {
 	}
 	return query
 }
-const loadData = query => {
+const loadData = async query => {
 	hideLoadMoreButton()
 	showLoader()
 	getImagesByQuery(query, page)
